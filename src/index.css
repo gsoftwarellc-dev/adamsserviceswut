@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ============================================
+   Adams Services, LLC — Design Tokens
+   Brand palette sampled from the company logo.
+   ============================================ */
+
+:root {
+  /* Brand — from logo */
+  --forest: #1b4d2e;
+  --forest-deep: #123520;
+  --forest-tint: #f2f7f3;
+  --leaf: #5cb847;
+  --leaf-bright: #6fd156;
+  --charcoal: #231f20;
+
+  /* Neutrals */
+  --white: #ffffff;
+  --ink: #231f20;
+  --ink-soft: #55575a;
+  --ink-mute: #7d8084;
+  --line: #e6e8e6;
+  --surface: #f7f9f7;
+
+  /* Type */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+
+  /* Layout */
+  --max: 1200px;
+  --gutter: 24px;
+  --radius: 14px;
+  --radius-lg: 20px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(35, 31, 32, 0.06),
+    0 2px 8px rgba(35, 31, 32, 0.04);
+  --shadow-md: 0 4px 12px rgba(35, 31, 32, 0.08),
+    0 12px 28px rgba(35, 31, 32, 0.06);
+  --shadow-lg: 0 12px 32px rgba(35, 31, 32, 0.12),
+    0 24px 60px rgba(35, 31, 32, 0.08);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Chrome */
+  --header-h: 84px;
+  --header-h-sm: 68px;
+}
+
+/* ============================================
+   Reset
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Anchored sections clear the fixed header */
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  font-family: var(--font);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.12;
+  letter-spacing: -0.022em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 3px solid var(--leaf);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--leaf);
+  color: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 860px) {
+  :root {
+    --header-h: var(--header-h-sm);
+    --gutter: 20px;
+  }
+
+  body {
+    font-size: 16px;
+  }
+}
+
+/* ============================================
+   Shared primitives
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(72px, 9vw, 120px);
+}
+
+.section--tint {
+  background: var(--forest-tint);
+}
+
+.section--surface {
+  background: var(--surface);
+}
+
+/* Eyebrow label above section headings */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 16px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 2px;
+  background: var(--leaf);
+  border-radius: 2px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-weight: 800;
+  color: var(--charcoal);
+}
+
+.section-lede {
+  margin-top: 18px;
+  max-width: 62ch;
+  color: var(--ink-soft);
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease), background-color 0.25s var(--ease),
+    box-shadow 0.25s var(--ease), color 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  background: var(--forest);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--primary:hover {
+  background: var(--forest-deep);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--leaf {
+  background: var(--leaf);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--leaf:hover {
+  background: var(--leaf-bright);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--charcoal);
+  border: 1.5px solid var(--line);
+}
+
+.btn--ghost:hover {
+  border-color: var(--forest);
+  color: var(--forest);
+  background: var(--forest-tint);
+}
+
+/* On photographic / dark backgrounds */
+.btn--glass {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn--glass:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--forest-deep);
+  border-color: transparent;
+}
+
+/* ============================================
+   Accessibility helpers
+   ============================================ */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 200;
+  padding: 12px 22px;
+  background: var(--forest);
+  color: var(--white);
+  font-weight: 600;
+  border-radius: 0 0 var(--radius) var(--radius);
+  transition: top 0.2s var(--ease);
+}
+
+.skip-link:focus {
+  top: 0;
+}

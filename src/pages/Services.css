@@ -1,0 +1,338 @@
+/* ============================================
+   Shared page header (Services + Gallery)
+   ============================================ */
+
+.page-hero {
+  padding-top: calc(var(--header-h) + clamp(56px, 7vw, 86px));
+  padding-bottom: clamp(56px, 7vw, 86px);
+  background: linear-gradient(
+    135deg,
+    var(--forest-deep) 0%,
+    var(--forest) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  top: -150px;
+  right: -110px;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(92, 184, 71, 0.25) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.page-hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero__title {
+  font-size: clamp(2.2rem, 5.2vw, 3.6rem);
+  font-weight: 800;
+  color: var(--white);
+  max-width: 18ch;
+}
+
+.page-hero__lede {
+  margin-top: 20px;
+  max-width: 60ch;
+  font-size: clamp(1rem, 1.7vw, 1.16rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+/* ============================================
+   Jump nav
+   ============================================ */
+
+.jump {
+  position: relative;
+  position: sticky;
+  top: var(--header-h);
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Fade at the right edge hints that the chip row scrolls sideways. */
+.jump::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 1px;
+  width: 56px;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.96)
+  );
+}
+
+.jump__inner {
+  display: flex;
+  gap: 9px;
+  padding-block: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.jump__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.jump__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 9px 17px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.89rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition: all 0.22s var(--ease);
+}
+
+.jump__chip svg {
+  color: var(--leaf);
+  transition: color 0.22s var(--ease);
+}
+
+.jump__chip:hover {
+  background: var(--forest);
+  border-color: var(--forest);
+  color: var(--white);
+}
+
+.jump__chip:hover svg {
+  color: var(--white);
+}
+
+/* ============================================
+   Service blocks
+   ============================================ */
+
+.svc-group__head {
+  max-width: 700px;
+  margin-bottom: clamp(44px, 5vw, 64px);
+}
+
+.svc-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 7vw, 96px);
+}
+
+.svc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+  /* Offset for the sticky header + jump bar when deep-linked */
+  scroll-margin-top: calc(var(--header-h) + 74px);
+}
+
+.svc--flip .svc__media {
+  order: 2;
+}
+
+.svc__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.svc__media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.svc__media:hover img {
+  transform: scale(1.04);
+}
+
+/* Shown for services we do not have a genuine photo of yet. */
+.svc__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(
+    135deg,
+    var(--forest-tint) 0%,
+    #e8f0ea 100%
+  );
+  color: var(--forest);
+  border: 1px dashed rgba(27, 77, 46, 0.22);
+  border-radius: var(--radius-lg);
+}
+
+.svc__placeholder span {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--forest);
+  opacity: 0.6;
+}
+
+.section--tint .svc__placeholder {
+  background: linear-gradient(135deg, #ffffff 0%, var(--forest-tint) 100%);
+}
+
+.svc__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--forest-tint);
+  color: var(--forest);
+  margin-bottom: 20px;
+}
+
+.svc__title {
+  font-size: clamp(1.5rem, 2.9vw, 2.1rem);
+  font-weight: 800;
+  color: var(--charcoal);
+}
+
+.svc__body {
+  margin-top: 16px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.svc__includes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 11px 20px;
+  margin-top: 26px;
+  padding: 0;
+  list-style: none;
+}
+
+.svc__includes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.svc__includes svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--leaf);
+}
+
+.svc__cta {
+  margin-top: 30px;
+}
+
+/* ============================================
+   Page CTA
+   ============================================ */
+
+.svc-cta {
+  padding-block: clamp(70px, 9vw, 108px);
+  background: linear-gradient(
+    135deg,
+    var(--forest) 0%,
+    var(--forest-deep) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.svc-cta::before {
+  content: '';
+  position: absolute;
+  bottom: -170px;
+  left: -90px;
+  width: 470px;
+  height: 470px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(92, 184, 71, 0.22) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.svc-cta__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.svc-cta__title {
+  font-size: clamp(1.8rem, 4.2vw, 2.85rem);
+  font-weight: 800;
+  color: var(--white);
+}
+
+.svc-cta__lede {
+  margin: 20px auto 0;
+  max-width: 58ch;
+  font-size: clamp(1rem, 1.7vw, 1.12rem);
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.svc-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 900px) {
+  .svc {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* Image always on top on narrow screens */
+  .svc--flip .svc__media {
+    order: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .svc__includes {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-cta__actions .btn,
+  .svc__cta {
+    width: 100%;
+  }
+}
