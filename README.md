@@ -18,7 +18,7 @@ npm run preview  # preview the production build
 src/
   data/site.ts        All business info, services, and gallery entries
   components/         Header, Footer, Reveal (scroll animation)
-  pages/              Home, Services, Gallery
+  pages/              Home, Services, Gallery, Contact
   assets/gallery/     Project photos
 ```
 
@@ -29,10 +29,10 @@ src/
 | `/`         | Introduction, Services, and About Us sections                    |
 | `/services` | Full detail on all eight services, deep-linkable per service     |
 | `/gallery`  | Filterable project photos with a lightbox                        |
+| `/contact`  | Phone, hours, service area, and what-to-expect steps              |
 
-Header and footer links scroll to the home page sections. From `/services` or
-`/gallery` they route home first, then scroll — handled in `Home.tsx` via
-router state.
+Header and footer links scroll to the home page sections. From any other page
+they route home first, then scroll — handled in `Home.tsx` via router state.
 
 ## Editing content
 
@@ -93,8 +93,11 @@ Update the domain in `public/sitemap.xml`, `public/robots.txt`, and the
 ## Notes for later
 
 - **No backend.** Every call-to-action is a `tel:` link to (801) 921-1032.
-  Adding a contact form means adding a form handler (Netlify Forms, Formspree,
-  or similar).
+  The contact page deliberately has **no form**: with nothing to receive a
+  submission, a form would silently discard customer messages. To add one
+  later, pick a destination first — on Vercel, an `/api/contact` serverless
+  function plus Resend works well; Formspree or Web3Forms need no backend
+  code. Either way the client's email address is required before it goes live.
 - **No email address** is published anywhere, since none was provided. If the
   client wants one shown, add it to `business` in `src/data/site.ts` and
   surface it in the footer.

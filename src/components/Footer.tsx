@@ -96,6 +96,9 @@ export default function Footer() {
           <Link to="/services" className="footer__link">
             All Services
           </Link>
+          <Link to="/contact" className="footer__link">
+            Contact
+          </Link>
         </nav>
 
         {/* Service links */}
@@ -138,9 +141,9 @@ export default function Footer() {
             </span>
           </div>
 
-          <a href={business.phoneHref} className="btn btn--leaf footer__cta">
+          <Link to="/contact" className="btn btn--leaf footer__cta">
             Request a Free Estimate
-          </a>
+          </Link>
         </div>
       </div>
 

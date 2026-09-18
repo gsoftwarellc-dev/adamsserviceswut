@@ -1,0 +1,344 @@
+/* Shares .page-hero and .svc-cta with the Services page. */
+@import './Services.css';
+
+/* ============================================
+   Primary contact
+   ============================================ */
+
+.contact__inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(40px, 6vw, 72px);
+  align-items: start;
+}
+
+/* Keeps the call CTA alongside the detail cards instead of leaving a
+   tall gap under the shorter left column. */
+.contact__main {
+  position: sticky;
+  top: calc(var(--header-h) + 32px);
+}
+
+.contact__heading {
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--charcoal);
+}
+
+.contact__sub {
+  margin-top: 16px;
+  max-width: 48ch;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/* ---------- Phone CTA ---------- */
+
+.contact__phone-cta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 32px;
+  padding: 22px 26px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    135deg,
+    var(--forest) 0%,
+    var(--forest-deep) 100%
+  );
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.contact__phone-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.contact__phone-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact__phone-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contact__phone-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--leaf-bright);
+}
+
+.contact__phone-number {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.contact__phone-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease);
+}
+
+.contact__phone-cta:hover .contact__phone-arrow {
+  transform: translateX(5px);
+}
+
+/* ---------- Reviews ---------- */
+
+.contact__reviews {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 22px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+
+.contact__reviews:hover {
+  border-color: var(--forest);
+  background: var(--forest-tint);
+}
+
+.contact__reviews strong {
+  color: var(--charcoal);
+  font-weight: 700;
+}
+
+.contact__stars {
+  display: inline-flex;
+  gap: 2px;
+  color: #ffc53d;
+}
+
+/* ============================================
+   Detail cards
+   ============================================ */
+
+.contact__details {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.detail {
+  display: flex;
+  gap: 16px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.detail:hover {
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+}
+
+.detail__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: var(--forest-tint);
+  color: var(--forest);
+}
+
+.detail__body {
+  min-width: 0;
+}
+
+.detail__title {
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+
+.detail__text {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.detail__hours {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.detail__hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.94rem;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--line);
+}
+
+.detail__hours li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detail__hours li span:first-child {
+  color: var(--charcoal);
+  font-weight: 500;
+}
+
+.detail__hours li span:last-child {
+  color: var(--ink-mute);
+  text-align: right;
+}
+
+.detail__services {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail__services a {
+  display: inline-block;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--forest-tint);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--forest);
+  transition: background-color 0.22s var(--ease), color 0.22s var(--ease);
+}
+
+.detail__services a:hover {
+  background: var(--forest);
+  color: var(--white);
+}
+
+/* ============================================
+   Process steps
+   ============================================ */
+
+.process__head {
+  max-width: 640px;
+  margin-bottom: clamp(38px, 4.5vw, 56px);
+}
+
+.process__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 22px;
+}
+
+.step {
+  position: relative;
+  height: 100%;
+  padding: 32px 28px;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  border: 1px solid var(--line);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.step__number {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--forest);
+  opacity: 0.1;
+}
+
+.step__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  background: var(--forest-tint);
+  color: var(--forest);
+  margin-bottom: 18px;
+}
+
+.step__title {
+  font-size: 1.14rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 9px;
+}
+
+.step__body {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 960px) {
+  .contact__inner {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stacked layout — nothing to stick beside. */
+  .contact__main {
+    position: static;
+  }
+}
+
+@media (max-width: 520px) {
+  .contact__phone-cta {
+    padding: 20px;
+    gap: 14px;
+  }
+
+  .contact__phone-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .contact__phone-arrow {
+    display: none;
+  }
+
+  .detail {
+    padding: 22px;
+  }
+}

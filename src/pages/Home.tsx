@@ -304,8 +304,8 @@ export default function Home() {
                 <Phone size={18} strokeWidth={2.2} />
                 {business.phone}
               </a>
-              <Link to="/services" className="btn btn--glass">
-                Explore services
+              <Link to="/contact" className="btn btn--glass">
+                Contact us
                 <ArrowRight size={18} strokeWidth={2.2} />
               </Link>
             </div>

@@ -15,6 +15,7 @@ const navItems = [
   { label: 'About Us', sectionId: 'about' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'All Services', path: '/services' },
+  { label: 'Contact', path: '/contact' },
 ] as const;
 
 export default function Header() {
