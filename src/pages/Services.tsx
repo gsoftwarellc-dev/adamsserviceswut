@@ -1,7 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Check, ArrowRight } from 'lucide-react';
+import {
+  Phone,
+  Check,
+  ArrowRight,
+  ChevronRight,
+  CalendarCheck,
+  Truck,
+  Sparkles,
+} from 'lucide-react';
 import { business, services, type Service } from '../data/site';
+import bandImage from '../assets/gallery/boulder-retaining.webp';
 import Reveal from '../components/Reveal';
 import './Services.css';
 
@@ -57,6 +66,31 @@ function ServiceBlock({ service, flip }: { service: Service; flip: boolean }) {
 
 export default function Services() {
   const location = useLocation();
+  const jumpRef = useRef<HTMLDivElement>(null);
+  /* Drives the "scroll for more" hint on the chip row. */
+  const [canScrollMore, setCanScrollMore] = useState(false);
+
+  useEffect(() => {
+    const el = jumpRef.current;
+    if (!el) return;
+
+    const update = () => {
+      // 4px tolerance so the hint clears at the true end of the row.
+      const remaining = el.scrollWidth - el.clientWidth - el.scrollLeft;
+      setCanScrollMore(remaining > 4);
+    };
+
+    update();
+    el.addEventListener('scroll', update, { passive: true });
+
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+
+    return () => {
+      el.removeEventListener('scroll', update);
+      observer.disconnect();
+    };
+  }, []);
 
   /* Deep links like /services#sprinklers scroll to that service. */
   useEffect(() => {
@@ -98,8 +132,11 @@ export default function Services() {
       </header>
 
       {/* Quick jump nav */}
-      <nav className="jump" aria-label="Jump to a service">
-        <div className="jump__inner container">
+      <nav
+        className={`jump ${canScrollMore ? 'jump--more' : ''}`}
+        aria-label="Jump to a service"
+      >
+        <div className="jump__inner container" ref={jumpRef}>
           {services.map((service) => (
             <a
               key={service.slug}
@@ -111,6 +148,12 @@ export default function Services() {
             </a>
           ))}
         </div>
+
+        {/* Affordance so people know the row keeps going sideways. */}
+        <span className="jump__hint" aria-hidden="true">
+          <span className="jump__hint-text">Scroll for more</span>
+          <ChevronRight size={16} strokeWidth={2.6} />
+        </span>
       </nav>
 
       {/* Core services */}
@@ -132,6 +175,67 @@ export default function Services() {
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Photo band — breaks up the long white stretch of service rows */}
+      <section className="svc-band" aria-labelledby="svc-band-title">
+        <div className="svc-band__media">
+          <img
+            src={bandImage}
+            alt="Boulder retaining wall and prepped planting bed installed by Adams Services"
+            loading="lazy"
+          />
+          <div className="svc-band__scrim" />
+        </div>
+
+        <div className="container svc-band__inner">
+          <Reveal className="svc-band__content">
+            <span className="eyebrow eyebrow--light">Why Adams Services</span>
+            <h2 id="svc-band-title" className="svc-band__title">
+              One crew, one number, every season
+            </h2>
+            <p className="svc-band__lede">
+              You should not need four contractors to keep one property
+              looking right. We design it, build it, maintain it, and clear
+              it when the snow comes.
+            </p>
+
+            <ul className="svc-band__points">
+              <li>
+                <span className="svc-band__point-icon" aria-hidden="true">
+                  <Sparkles size={20} strokeWidth={2} />
+                </span>
+                <span>
+                  <strong>Free on-site estimates</strong>
+                  Clear scope and honest pricing before any work starts.
+                </span>
+              </li>
+              <li>
+                <span className="svc-band__point-icon" aria-hidden="true">
+                  <CalendarCheck size={20} strokeWidth={2} />
+                </span>
+                <span>
+                  <strong>Same crew, same schedule</strong>
+                  You always know who is coming and when.
+                </span>
+              </li>
+              <li>
+                <span className="svc-band__point-icon" aria-hidden="true">
+                  <Truck size={20} strokeWidth={2} />
+                </span>
+                <span>
+                  <strong>We haul it all away</strong>
+                  Nothing gets left behind for you to deal with.
+                </span>
+              </li>
+            </ul>
+
+            <a href={business.phoneHref} className="btn btn--leaf">
+              <Phone size={18} strokeWidth={2.2} />
+              Call {business.phone}
+            </a>
+          </Reveal>
         </div>
       </section>
 

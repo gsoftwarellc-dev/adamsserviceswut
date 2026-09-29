@@ -25,6 +25,7 @@
   justify-content: space-between;
   gap: 24px;
   width: 100%;
+  padding-block: 10px;
 }
 
 /* ---------- Brand ---------- */
@@ -32,7 +33,7 @@
 .header__brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   flex-shrink: 0;
   transition: opacity 0.2s var(--ease);
 }
@@ -42,16 +43,17 @@
 }
 
 .header__logo {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  object-fit: cover;
+  width: 84px;
+  height: 84px;
+  /* The mark is a transparent PNG, not a badge — contain keeps the
+     full "A" visible instead of cropping it to a circle. */
+  object-fit: contain;
   transition: width 0.3s var(--ease), height 0.3s var(--ease);
 }
 
 .header--scrolled .header__logo {
-  width: 44px;
-  height: 44px;
+  width: 68px;
+  height: 68px;
 }
 
 .header__brand-text {
@@ -61,16 +63,16 @@
 }
 
 .header__brand-name {
-  font-size: 1.12rem;
+  font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--charcoal);
 }
 
 .header__brand-sub {
-  font-size: 0.68rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--leaf);
 }
@@ -258,11 +260,11 @@
 
   .header__logo,
   .header--scrolled .header__logo {
-    width: 40px;
-    height: 40px;
+    width: 52px;
+    height: 52px;
   }
 
   .header__brand-name {
-    font-size: 1rem;
+    font-size: 1.18rem;
   }
 }

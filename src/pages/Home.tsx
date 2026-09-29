@@ -10,20 +10,30 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { business, services, valueProps } from '../data/site';
+import { useGoogleRating } from '../hooks/useGoogleRating';
 import Reveal from '../components/Reveal';
 import heroImage from '../assets/gallery/paver-walkway-wide.webp';
 import aboutImage from '../assets/gallery/rock-bed-feature.webp';
 import './Home.css';
 
-const trustStats = [
-  { icon: Star, value: '5.0', label: 'Google rating' },
-  { icon: Users, value: '19+', label: 'Happy clients' },
-  { icon: CalendarCheck, value: '2023', label: 'Established' },
-  { icon: ShieldCheck, value: '100%', label: 'Satisfaction focused' },
-];
+/** Built per-render so the Google figures track the live rating. */
+function buildTrustStats(rating: number, reviewCount: number) {
+  return [
+    { icon: Star, value: rating.toFixed(1), label: 'Google rating' },
+    { icon: Users, value: `${reviewCount}+`, label: 'Happy clients' },
+    {
+      icon: CalendarCheck,
+      value: String(business.established),
+      label: 'Established',
+    },
+    { icon: ShieldCheck, value: '100%', label: 'Satisfaction focused' },
+  ];
+}
 
 export default function Home() {
   const location = useLocation();
+  const { rating, reviewCount, url: reviewsUrl } = useGoogleRating();
+  const trustStats = buildTrustStats(rating, reviewCount);
 
   /**
    * When another page routes here asking for a section (via the header or
@@ -76,9 +86,11 @@ export default function Home() {
           </div>
 
           <h1 id="hero-title" className="hero__title">
-            Outdoor spaces
+            Take back your time.
             <br />
-            <span className="hero__title-accent">built to last.</span>
+            Reclaim your weekend.
+            <br />
+            <span className="hero__title-accent">Let us help.</span>
           </h1>
 
           <p className="hero__lede">
@@ -98,17 +110,22 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="hero__proof">
+          <a
+            href={reviewsUrl}
+            className="hero__proof"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <span className="hero__stars" aria-hidden="true">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} size={16} fill="currentColor" strokeWidth={0} />
               ))}
             </span>
             <span>
-              <strong>{business.rating.toFixed(1)}</strong> from{' '}
-              {business.reviewCount} Google reviews
+              <strong>{rating.toFixed(1)}</strong> from {reviewCount} Google
+              reviews
             </span>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -142,7 +159,7 @@ export default function Home() {
           <Reveal className="services__head">
             <span className="eyebrow">What We Do</span>
             <h2 id="services-title" className="section-title">
-              A complete suite of outdoor solutions
+              A Year-Round Suite of Yard Care Services
             </h2>
             <p className="section-lede">
               From the first shovel of dirt to the last string of Christmas
@@ -180,7 +197,7 @@ export default function Home() {
                   Winter &amp; Seasonal
                 </span>
                 <h3 className="seasonal__title">
-                  We do not disappear when it gets cold
+                  We don&rsquo;t just disappear when things get cold
                 </h3>
               </div>
               <p className="seasonal__lede">
@@ -247,7 +264,7 @@ export default function Home() {
             <Reveal>
               <span className="eyebrow">About Us</span>
               <h2 id="about-title" className="section-title">
-                Your single source for the whole property
+                Your single source for the complete property care
               </h2>
               <p className="about__body">
                 Established in {business.established},{' '}

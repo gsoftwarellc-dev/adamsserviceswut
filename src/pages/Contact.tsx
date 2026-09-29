@@ -11,6 +11,7 @@ import {
   CalendarCheck,
 } from 'lucide-react';
 import { business, services } from '../data/site';
+import { useGoogleRating } from '../hooks/useGoogleRating';
 import Reveal from '../components/Reveal';
 import './Contact.css';
 
@@ -34,6 +35,7 @@ const steps = [
 ];
 
 export default function Contact() {
+  const { rating, reviewCount, url: reviewsUrl } = useGoogleRating();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, []);
@@ -86,7 +88,7 @@ export default function Contact() {
             </a>
 
             <a
-              href={business.googleReviewsUrl}
+              href={reviewsUrl}
               className="contact__reviews"
               target="_blank"
               rel="noopener noreferrer"
@@ -97,8 +99,8 @@ export default function Contact() {
                 ))}
               </span>
               <span>
-                <strong>{business.rating.toFixed(1)}</strong> from{' '}
-                {business.reviewCount} Google reviews
+                <strong>{rating.toFixed(1)}</strong> from {reviewCount}{' '}
+                Google reviews
               </span>
             </a>
           </Reveal>

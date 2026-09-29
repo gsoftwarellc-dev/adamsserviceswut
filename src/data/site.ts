@@ -30,7 +30,7 @@ export const business = {
   serviceArea: 'Plain City & Northern Utah',
   established: 2023,
   rating: 5.0,
-  reviewCount: 19,
+  reviewCount: 21,
   googleReviewsUrl:
     'https://www.google.com/search?q=Adams+Services+LLC+Plain+City+UT',
   hours: [

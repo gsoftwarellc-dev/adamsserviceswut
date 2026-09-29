@@ -1,12 +1,14 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Phone, MapPin, Clock, Star } from 'lucide-react';
 import { business, services } from '../data/site';
-import logo from '../assets/logo.png';
+import { useGoogleRating } from '../hooks/useGoogleRating';
+import logo from '../assets/logo-mark.png';
 import './Footer.css';
 
 export default function Footer() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { rating, reviewCount, url: reviewsUrl } = useGoogleRating();
   const isHome = location.pathname === '/';
 
   /** Same behavior as the header: route home first if needed, then scroll. */
@@ -34,8 +36,8 @@ export default function Footer() {
               src={logo}
               alt=""
               className="footer__logo"
-              width={64}
-              height={64}
+              width={72}
+              height={72}
             />
             <div>
               <p className="footer__name">{business.name}</p>
@@ -49,7 +51,7 @@ export default function Footer() {
           </p>
 
           <a
-            href={business.googleReviewsUrl}
+            href={reviewsUrl}
             className="footer__rating"
             target="_blank"
             rel="noopener noreferrer"
@@ -60,8 +62,7 @@ export default function Footer() {
               ))}
             </span>
             <span>
-              {business.rating.toFixed(1)} · {business.reviewCount} Google
-              reviews
+              {rating.toFixed(1)} · {reviewCount} Google reviews
             </span>
           </a>
         </div>

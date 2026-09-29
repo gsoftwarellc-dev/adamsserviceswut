@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import { business } from '../data/site';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo-mark.png';
 import './Header.css';
 
 /**
@@ -120,8 +120,8 @@ export default function Header() {
               src={logo}
               alt=""
               className="header__logo"
-              width={52}
-              height={52}
+              width={84}
+              height={84}
             />
             <span className="header__brand-text">
               <span className="header__brand-name">Adams Services</span>
